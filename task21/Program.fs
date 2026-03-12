@@ -8,17 +8,17 @@ let rec input () =
         eprintfn "Ошибка: введите целое положительное число!"
         input ()
 
-let rec BuildList cnt =
+let rec buildList cnt =
     if cnt <= 0 then 
         []
     else 
         printf "Введите число (1-9): "
         match Int32.TryParse(Console.ReadLine()) with
         | true, value when value >= 1 && value <= 9 ->
-            value :: BuildList (cnt - 1)
+            value :: buildList (cnt - 1)
         | _ ->
             eprintfn "Ошибка: введите целое число от 1 до 9"
-            BuildList cnt
+            buildList cnt
 
 let rec toBinary n =
     if n = 0 then 
@@ -31,11 +31,11 @@ let rec toBinary n =
 [<EntryPoint>]
 let main args = 
     let cnt = input()
-    let inList = BuildList cnt
+    let inList = buildList cnt
 
-    let BinList = inList |> List.map toBinary
+    let binList = inList |> List.map toBinary
 
     printfn "\nИсходные числа: %A" inList
-    printfn "В двоичной системе: %A" BinList
+    printfn "В двоичной системе: %A" binList
 
     0
