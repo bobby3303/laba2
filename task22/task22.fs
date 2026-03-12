@@ -8,17 +8,17 @@ let rec input () =
         eprintfn "Ошибка: введите целое положительное число!"
         input ()
 
-let rec BuildList cnt =
+let rec buildList cnt =
     if cnt <= 0 then 
         []
     else 
         printf "Введите число (0-9): "
         match Int32.TryParse(Console.ReadLine()) with
         | true, value when value >= 0 && value <= 9 ->
-            value :: BuildList (cnt - 1)
+            value :: buildList (cnt - 1)
         | _ ->
             eprintfn "Ошибка: введите целое число от 0 до 9"
-            BuildList cnt
+            buildList cnt
 
 let digitToWord n =
     match n with
@@ -44,7 +44,7 @@ let folder acc n =
 [<EntryPoint>]
 let main args = 
     let cnt = input()
-    let inList = BuildList cnt
+    let inList = buildList cnt
 
     let result = List.fold folder "" inList
 
